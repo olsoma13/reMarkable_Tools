@@ -14,15 +14,15 @@ Set of Python scripts to automate the deployment of Templates and/or Splash Scre
 **Note:** Re-deploy with each ReMarkable software update.
 _todo: add splash screen config. (Basically the same as Templates, just different files and paths!)_
 
-1. Edit `config.json.template` to update the pertinent values in the `RM_customize` block. Rename as `config.json` in the same directory.
-2. Create PNG and SVG versions of the templates. Tablet native resolution: Native resolution - 1872x1404 @ 226dpi (Set palette size to that custom size and used 160 dpi in LucidChart<https://lucidchart.com> for export)
+1. Edit `config.json.template` to update the pertinent values in the `RM_customize` block. Rename as `config.json` in the same directory
+2. Create PNG and SVG versions of the templates. Tablet native resolution: 1872x1404 @ 226dpi (Set palette size to that custom size and used 160 dpi in LucidChart<https://lucidchart.com> for export)
 3. Save template files to `/Templates` directory
 4. Modify the `templates.json` document in the same directory
-5. Execute `RM_customize.py` in the virtualized environment.
+5. Execute `RM_customize.py` in the virtualized environment
 
 ### REST-based push to RM
 
-_todo: Building a REST API to convert a webpage to PDF using Python pdfkit <https://pypi.org/project/pdfkit/> & rmapy <https://rmapy.readthedocs.io/en/latest/quickstart.html>_
+_todo: Build a REST API to convert a webpage to PDF using Python pdfkit <https://pypi.org/project/pdfkit/> & rmapy <https://rmapy.readthedocs.io/en/latest/quickstart.html>_
 
 ### Notes for Getting DRM protected ePub books on my ReMarkable
 
