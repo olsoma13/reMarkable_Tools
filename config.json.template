@@ -1,0 +1,20 @@
+{
+    "logging": {
+        "__usage_level": "Must use one of the following levels: CRITICAL, ERROR, WARNING, INFO or DEBUG",
+        "level": "WARNING",
+        "__usage_location": "Use `FILE` for the standard output file(s) or `CONSOLE` for the system console.",
+        "location": "CONSOLE"
+    },
+    "notification": {
+        "enabled": true,
+        "base_url": "https://hook.notify17.net/api/raw/",
+        "API_key": "yourRawKey"
+    },
+    "RM_restore": {
+        "address": "ReMarkable",
+        "pw": "On your RM: Settings > Help > Copyrights and Licenses"
+    },
+    "DRM_ePUBS": {
+        "kindle_sn": "B02416033027044D"
+    }
+} 
