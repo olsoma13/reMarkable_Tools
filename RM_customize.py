@@ -3,7 +3,7 @@ import asyncio
 import json
 import sys
 
-import asyncssh #https://asyncssh.readthedocs.io/en/latest/#optional-extras
+import asyncssh #https://asyncssh.readthedocs.io/en/latest/
 
 import log
 
@@ -22,17 +22,35 @@ except TypeError:
 
 if __name__ == "__main__":
     async def run_client():
-        put_files = ["Templates/*.png", "Templates/*.svg", "Templates/*.json"]
         dest = config["RM_customize"]["address"] 
-        ssh_string = dest + ":" + "/usr/share/remarkable/templates/"
         my_user = "root"
         my_pw = config["RM_customize"]["pw"]
-        await asyncssh.scp(put_files, ssh_string, username=my_user, password=my_pw)
-        logger.warning("Completed update of remote ReMarkable files. Sending restart command to RM")
+
+        #Upload Templates
+        try:
+            origin_templates = ["Templates/*.png", "Templates/*.svg", "Templates/*.json"]
+            dest_ssh_templates = dest + ":" + "/usr/share/remarkable/templates/"
+            await asyncssh.scp(origin_templates, dest_ssh_templates, username=my_user, password=my_pw)
+            logger.debug("Completed update of remote Templates.")
+        except (OSError, asyncssh.Error) as template_exc:
+            logger.warning("Template uploads failed", template_exc)
+
+        #Upload Splash Screens
+        try:
+            origin_splashscreens = "Splashscreens/*.png"
+            dest_ssh_splashscreen = dest + ":" + "/usr/share/remarkable/"
+            await asyncssh.scp(origin_splashscreens, dest_ssh_splashscreen, username=my_user, password=my_pw)
+            logger.debug("Completed update of remote ReMarkable files. Sending restart command to RM")
+        except (OSError, asyncssh.Error) as splashscreen_exc:
+            logger.warning("Splashscreen uploads failed", splashscreen_exc)
+
+        #Restart
         async with asyncssh.connect('reMarkable', username=my_user, password=my_pw) as conn:
             # Had to hack a method to ensure the shell gives a prompt back: https://stackoverflow.com/a/26119118/15725505
+            logger.warning("Uploads completed successfully. Restarting reMarkable for changes to take effect.")
             result = await conn.run('/sbin/reboot -f > /dev/null 2>&1 &', check=True)
             print(result.stdout, end='')
+
     try:
         asyncio.get_event_loop().run_until_complete(run_client())
     except (OSError, asyncssh.Error) as exc:

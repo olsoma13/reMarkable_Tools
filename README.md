@@ -14,6 +14,8 @@ Set of Python scripts to automate the deployment of Templates and/or Splash Scre
 **Note:** Re-deploy with each ReMarkable software update.
 _todo: add splash screen config. (Basically the same as Templates, just different files and paths!)_
 
+- splashscreen scp: `scp root@remarkable:/usr/share/remarkable/\*.png ./`
+
 1. Edit `config.json.template` to update the pertinent values in the `RM_customize` block. Rename as `config.json` in the same directory
 2. Create PNG and SVG versions of the templates. Tablet native resolution: 1872x1404 @ 226dpi (Set palette size to that custom size and used 160 dpi in LucidChart<https://lucidchart.com> for export)
 3. Save template files to `/Templates` directory
