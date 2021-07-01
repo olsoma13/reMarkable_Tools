@@ -45,7 +45,7 @@ if __name__ == "__main__":
             logger.warning("Splashscreen uploads failed", splashscreen_exc)
 
         #Restart
-        async with asyncssh.connect('reMarkable', username=my_user, password=my_pw) as conn:
+        async with asyncssh.connect(dest, username=my_user, password=my_pw) as conn:
             # Had to hack a method to ensure the shell gives a prompt back: https://stackoverflow.com/a/26119118/15725505
             logger.warning("Uploads completed successfully. Restarting reMarkable for changes to take effect.")
             result = await conn.run('/sbin/reboot -f > /dev/null 2>&1 &', check=True)
