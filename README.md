@@ -4,7 +4,7 @@ This is a library of the personal tools I use to increase the productivity of my
 
 **Prerequisites:** You should have working knowledge of Python, ssh, and *nix operating systems if using these tools. See LICENSE as there is no guarantee of any functionality.
 
-**Note:** These tools are developed for use on an OSX python implementation using `pipenv` virtualization config. They certainly could be adapted to Windows or other python implementations, but they'll take a little work.
+**Note:** These tools are developed for use on an OSX python implementation using `pipenv` virtualization config. They also use SSH for connection to the reMarkable. The project certainly could be adapted to Windows or other python implementations, but might take a little work.
 
 ## Tools
 
@@ -12,9 +12,6 @@ This is a library of the personal tools I use to increase the productivity of my
 
 Set of Python scripts to automate the deployment of Templates and/or Splash Screens (TBD) to your reMarkable Tablet. Automates processes outlined here: <https://remarkablewiki.com/tips/templates> && <https://remarkablewiki.com/tips/splashscreens>
 **Note:** Re-deploy with each ReMarkable software update.
-_todo: add splash screen config. (Basically the same as Templates, just different files and paths!)_
-
-- splashscreen scp: `scp root@remarkable:/usr/share/remarkable/\*.png ./`
 
 1. Edit `config.json.template` to update the pertinent values in the `RM_customize` block. Rename as `config.json` in the same directory
 2. Create PNG and SVG versions of the templates. Tablet native resolution: 1872x1404 @ 226dpi (Set palette size to that custom size and used 160 dpi in LucidChart<https://lucidchart.com> for export)
