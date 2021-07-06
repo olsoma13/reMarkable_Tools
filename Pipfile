@@ -8,6 +8,7 @@ flask = "*"
 pdfkit = "*"
 rmapy = "*"
 asyncssh = "*"
+remarkable-tools = {editable = true, path = "."}
 
 [dev-packages]
 

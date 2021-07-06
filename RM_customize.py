@@ -6,6 +6,7 @@ import sys
 import asyncssh #https://asyncssh.readthedocs.io/en/latest/
 
 import log
+from sshauth import sshauth as sshauth
 
 # Start logging stuff
 logger = log.setup_logger(__name__)
@@ -20,9 +21,25 @@ except TypeError:
     logger.critical("failed to parse json")
     sys.exit()
 
+def define_host():
+    myIP = config["RM_customize"]["address"] 
+    if sshauth.validate_key("reMarkable") is True:
+        return "reMarkable"
+    elif sshauth.add_fingerprint("reMarkable") is True:
+        return "reMarkable"
+    elif sshauth.validate_key(myIP) is True:
+        return myIP
+    elif sshauth.add_fingerprint(myIP) is True:
+        return myIP
+    else:
+        logger.critical("Not able to use 'reMarkable' hostname or IP defined in config.json. Exiting.")
+        sys.exit()
+
+my_host = define_host()
+
 if __name__ == "__main__":
     async def run_client():
-        dest = config["RM_customize"]["address"] 
+        dest = my_host
         my_user = "root"
         my_pw = config["RM_customize"]["pw"]
 
